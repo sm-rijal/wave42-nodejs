@@ -1,6 +1,6 @@
 
 
-function getProducts(){
+exports.getProducts = () => {
     const products = [
         {
             nama: "Aqua",
@@ -21,5 +21,17 @@ function getProducts(){
  
     return products
 }
-
-module.exports = getProducts
+exports.getUsers = () => {
+    const users = [
+        {
+            nama: "Kevin",
+            alamat: "Tangerang"
+        },
+        {
+            nama: "Asep",
+            alamat: "Jakarta"
+        },
+    ]
+ 
+    return users
+}
