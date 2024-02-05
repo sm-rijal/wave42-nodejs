@@ -2,20 +2,15 @@
   "name": "materi-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon app.js"
   },
   "author": "Samsul Rijal",
   "license": "ISC",
   "dependencies": {
-    "colors": "^1.4.0",
-    "lodash": "^4.17.21",
-    "moment": "^2.30.1",
-    "validator": "^13.11.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.3"
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
