@@ -1,65 +1,76 @@
 const express = require("express");
 const app = express();
-const port = 3000
+const port = 8000
 
-app.set('view engine', 'ejs') // set view engine
-app.use(express.static('public')) // untuk membaca file yang ada di folder public
-app.use(express.urlencoded({extended: false}))
+
+app.use(express.json()) // agar method post bisa menerima data json
 
 app.get('/', (req, res) => {
-    const nama = "Samsul Rijal"
+    res.send("hallo")
+})
 
-    res.render('index', {nama})
-});
+const users = [
+    {
+        id: 1,
+        name: "Faris",
+        address: "Tangerang"
+    },
+    {
+        id: 2,
+        name: "Adit",
+        address: "Jakarta"
+    },
+    {
+        id: 3,
+        name: "Mariana",
+        address: "Jakarta"
+    },
+]
 
 app.get('/users', (req, res) => {
-    const user = {
-        nama: "Samsul Rijal",
-        alamat: "Jakarta"
-    }
+    
 
-    res.render('user', {user})
+    res.send(users)
+})
+
+// params
+app.get('/users/:id', (req, res) => {
+    const params = req.params.id
+    const findOne = users.find((item) => item.id === Number(params));
+    if(!findOne){
+        res.status(404).send({
+            status: 404,
+            message: "data tidak ditemukan"
+        })
+    } else {
+        res.status(200).send(findOne)
+    }
+})
+
+// params query
+// app.get('/users', (req, res) => {
+//     const query = req.query 
+//     console.log(query);
+//     const filter = users.filter((item) => item.address === req.query.address)
+    
+//     res.send(filter)
+// })
+
+
+// method post
+app.post('/users',(req, res) => {
+
+    console.log(req.body);
+    const body = req.body // berfungsi untuk ngambil data request dari client
+    users.push(body)
+
+    res.status(201).send({
+        status: 201,
+        message: "data user berhasil ditambahkan",
+        data: body
+    })
+
 });
-
-app.get('/products',(req, res) => {
-    const products = [
-        {
-            nama: "Aqua",
-            harga: 5000
-        },
-        {
-            nama: "Cleo",
-            harga: 3000
-        },
-        {
-            nama: "Le Minerale",
-            harga: 4000
-        },
-    ]
-
-    res.render('product', {products})
-
-})
-
-app.get('/form',(req, res) => {
-
-    res.render('form')
-})
-app.post('/add-product',(req, res) => {
-
-    // console.log(req.body.nama);
-    // console.log(req.body.harga);
-
-    const body = {
-        nama: req.body.nama,
-        harga: req.body.harga
-    }
-    console.log(body);
-
-    res.redirect('form')
-})
-
-
 
 
 app.listen(port, () => console.log(`server running on port ${port}`))
