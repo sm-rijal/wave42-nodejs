@@ -1,6 +1,7 @@
 const express = require("express");
 const { getAllUsers, getById, postUser, patchUser, deleteUser } = require("../controllers/users");
 const { getAllProducts, getProductsById, postProduct, EditProducts, deleteProducts } = require("../controllers/products");
+const { getTransactions, postTransactions } = require("../controllers/transactions");
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -20,5 +21,9 @@ router.get('/products/:id', getProductsById);
 router.post('/products', postProduct);
 router.patch('/products/:id', EditProducts);
 router.delete('/products/:id', deleteProducts);
+
+// transaksi
+router.get('/transactions', getTransactions);
+router.post('/transactions', postTransactions);
 
 module.exports = router;
