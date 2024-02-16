@@ -1,3 +1,5 @@
+const { responseNotFound } = require("../utils/response")
+
 let users = [
     {
         id: 1,
@@ -19,10 +21,7 @@ exports.getById = (req, res) => {
     const params = req.params.id
     const findOne = users.find((item) => item.id === Number(params))
     if (!findOne){
-        res.status(404).send({
-            status: 404,
-            message: "data tidak ditemukan"
-        })
+        responseNotFound(res, params)
     }
 
     res.send(findOne)

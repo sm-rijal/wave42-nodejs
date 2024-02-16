@@ -1,24 +1,23 @@
 const { products } = require("../dummy/data")
+const { responseSuccess, responseNotFound } = require("../utils/response")
 
 // get all products
 exports.getAllProducts = (req, res) => {
 
-    res.send(products)
+    // res.send(products)
+    responseSuccess(res, products)
 }
 
 // get by id
 exports.getProductsById = (req, res) => {
     const id = req.params.id
 
-    const findOne = products.find((item) => item.id === Number(id));
+    const findOne = products.find((item) => item.id === Number(id)); //
     if(!findOne){
-        res.status(404).send({
-            status: 404,
-            message: "data tidak ditemukan"
-        });
+        responseNotFound(res, id)
     }
 
-    res.send(findOne)
+    responseSuccess(res, findOne)
 }
 
 // post users
@@ -31,7 +30,7 @@ exports.postProduct = (req, res) => {
         price: price,
     }
 
-    products.push(newProduct);
+    products.push(newProduct); //
 
     res.status(201).send({
         status: 201,
@@ -54,21 +53,19 @@ exports.EditProducts = (req, res) => {
     // console.log(index);
     // find -> mendapatkan data object
     // findIndex -> mendapatkan posisi index nya
-    res.send(products);
+    // res.send(products);
+    responseSuccess(res, products)
 }
 
 exports.deleteProducts = (req, res) => {
     const ID = req.params.id
     const findOne = products.find((item) => item.id == ID);
     if(!findOne){
-        res.status(404).send({
-            status: 404,
-            message: `id ${ID} tidak ditemukan`
-        });
+        responseNotFound(res, ID)
     } else {
         products = products.filter((item) => item.id != ID);
         res.send({
-            message: `id product ${ID} berhasil dihapus`
+            message: `id ${ID} berhasil dihapus`
         })
     }
 }
