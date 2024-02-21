@@ -1,4 +1,0 @@
-200 ok
-201 created
-404 not found
-400 bad request
