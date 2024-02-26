@@ -26,6 +26,7 @@ app.get('/form', (req, res) => {
 app.post('/add-product', (req, res) => {
     products.push(req.body)
 
+
     res.redirect('/products')
 })
 
