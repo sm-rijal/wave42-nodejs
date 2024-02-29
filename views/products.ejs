@@ -14,14 +14,17 @@
                 <p>data produk kosong</p>
             <%} else { %>
                 <% products.forEach((item) => { %>
-                    <li>Nama Product : <%= item.name %> </li>
-                    <li>Harga Product : <%= item.price %> </li>
+                    <div>
+                        <li><a href="/detail-product/<%= item.id %>"> Nama Product : <%= item.name %> </a></li>
+                        <li>Harga Product : <%= item.price %> </li>
+                        <li>Nama Toko : <%= item.toko %> </li>
+                    </div>
+                    <hr />
                <% }) %>
             <%}%>
         </ul>
 
 
         <%- include('footer') %>
-
 </body>
 </html>

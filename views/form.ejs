@@ -10,11 +10,21 @@
     <form action="/add-product" method="POST">
         <div>
             <label for="nama">Nama Produk</label>
-            <input type="text" id="nama" name="nama">
+            <input type="text" id="nama" name="name">
         </div>
         <div>
             <label for="harga">Harga Produk</label>
-            <input type="number" id="harga" name="harga">
+            <input type="number" name="price">
+            <div>
+                <label for="store_id">Nama Toko</label>
+                <select id="store_id" name="store_id">
+                    <option value="">Pilih</option>
+                    <option value="1">Jaya Makmur</option>
+                    <option value="2">Berkah Selalu</option>
+                    <option value="3">Maju Jaya</option>
+                </select>
+
+            </div>
         </div>
 
         <button type="submit">Simpan</button>

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const db = require('./connection/db')
+const database = require('./connection/database');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public')) // untuk membaca file yang ada di folder public
@@ -16,13 +17,27 @@ app.get('/', (req, res) => {
 let products = []
 
 app.get('/products', async(req, res) => {
+    // const response = await db.query('SELECT * FROM products')
+    // const dataProducts = response.rows
 
-    const response = await db.query('SELECT * FROM products')
-    // console.log(response.rows);
-    const dataProducts = response.rows
-
-    res.render('products', {products: dataProducts})
+    const data = await database('products').select('products.id', 'products.name', 'products.price','store.name as toko')
+    .innerJoin('store', 'products.store_id', '=', 'store.id').orderBy('id', 'desc')
+    res.render('products', {products: data})
 })
+
+app.get('/detail-product/:id', async(req, res) => {
+    try {
+        const ID = req.params.id
+        const response = await database.select('*').from('products').where('id', ID)    
+        
+        // console.log(response[0].id);
+        const detailProduct = response[0]
+        res.render('detail-product', {detailProduct})
+        
+    } catch (error) {
+        console.log(error);
+    }
+}) 
 
 app.get('/transaction', async(req, res) => {
 
@@ -46,11 +61,20 @@ app.get('/form', (req, res) => {
     res.render('form')
 })
 
-app.post('/add-product', (req, res) => {
-    products.push(req.body)
+app.post('/add-product', async(req, res) => {
+    // products.push(req.body)
 
+    console.log(req.body);
+    const {name, price, store_id} = req.body
+    const newProduct = {
+        name,
+        price: Number(price),
+        store_id: Number(store_id)
+    }
+
+    await database('products').insert(newProduct)
 
     res.redirect('/products')
 })
 
-app.listen(8000)
+app.listen(8000, () => console.log('server running on port 8000'))
