@@ -1,17 +1,34 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const getHello = require("../controllers/hello");
+const { getStore } = require("../controllers/store");
+const { getProduct, postProduct, getByIdProduct, patchProduct } = require("../controllers/product");
+const formProduct = require("../controllers/form");
+const { findByIdProduct } = require("../models/productModel.");
+const { findAllStore } = require("../models/storeModel");
+const router = express.Router();
 
-const { getUser, getUserById } = require("../controllers/users");
-const { getProducts, getProductById } = require("../controllers/products");
 
-router.get("/", (req, res) => {
-    res.send("Hello World")
+router.get('/', getHello);
+router.get('/store', getStore);
+
+router.get('/products', getProduct);
+router.post('/add-product', postProduct);
+router.post('/edit-product/:id', patchProduct);
+router.get('/detail-product/:id', getByIdProduct);
+
+router.get('/form', formProduct);
+
+router.get('/edit-product/:id', async(req, res) => {
+    const ID = req.params.id
+
+    const product = await findByIdProduct(ID);
+    const store = await findAllStore();
+    res.render('edit-product', {product, store})
+    
 })
 
-router.get("/users", getUser)
-router.get("/users/:nama", getUserById)
-router.get("/products", getProducts)
-router.get("/product/:id", getProductById)
 
 
-module.exports = router
+module.exports = router;
+
+// routes

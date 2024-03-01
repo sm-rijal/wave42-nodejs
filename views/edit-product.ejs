@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('header') %>
+    <form action="/edit-product/<%= product.id %>" method="POST">
+        <div>
+            <label for="nama">Nama Produk</label>
+            <input type="text" id="nama" name="name" value="<%= product.name%>">
+        </div>
+        <div>
+            <label for="harga">Harga Produk</label>
+            <input type="number" name="price" value="<%= product.price%>">
+            <div>
+                <label for="store_id">Nama Toko</label>
+                <select id="store_id" name="store_id">
+                    <option value="">Pilih</option>
+                    
+                   <% store.forEach(store => { %>
+                    <option value="<%= store.id %>" <% if (store.id == product.store_id) { %> selected <%}%> ><%= store.name %></option>
+                <% }); %>
+
+                </select>
+
+            </div>
+        </div>
+
+        <button type="submit">Simpan</button>
+    </form>
+    <%- include('footer') %>
+
+</body>
+</html>

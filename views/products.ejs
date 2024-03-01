@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <%- include('header') %>
+
+        <h2>Halaman Products</h2>
+        <ul>
+            <% if(products.length === 0) { %>
+                <p>data produk kosong</p>
+            <%} else { %>
+                <% products.forEach((item) => { %>
+                    <div>
+                        <li><a href="/detail-product/<%= item.id %>"> Nama Product : <%= item.name %> </a></li>
+                        <li>Harga Product : <%= item.price %> </li>
+                        <li>Nama Toko : <%= item.toko %> </li>
+                        <div>
+                            <a href="/edit-product/<%= item.id %>">Edit</a>
+                            <a href="#">Delete</a>
+                        </div>
+                    </div>
+                    <hr />
+               <% }) %>
+            <%}%>
+        </ul>
+
+
+        <%- include('footer') %>
+</body>
+</html>
