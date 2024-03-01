@@ -18,6 +18,10 @@
                         <li><a href="/detail-product/<%= item.id %>"> Nama Product : <%= item.name %> </a></li>
                         <li>Harga Product : <%= item.price %> </li>
                         <li>Nama Toko : <%= item.toko %> </li>
+                        <div>
+                            <a href="/edit-product/<%= item.id %>">Edit</a>
+                            <a href="#">Delete</a>
+                        </div>
                     </div>
                     <hr />
                <% }) %>
