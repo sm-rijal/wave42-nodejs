@@ -19,9 +19,9 @@
                 <label for="store_id">Nama Toko</label>
                 <select id="store_id" name="store_id">
                     <option value="">Pilih</option>
-                    <option value="1">Jaya Makmur</option>
-                    <option value="2">Berkah Selalu</option>
-                    <option value="3">Maju Jaya</option>
+                    <% store.forEach(store => { %>
+                        <option value="<%= store.id %>"><%= store.name %></option>
+                    <% }); %>
                 </select>
 
             </div>

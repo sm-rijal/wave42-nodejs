@@ -20,9 +20,9 @@
                 <select id="store_id" name="store_id">
                     <option value="">Pilih</option>
                     
-                   <% store.forEach(store => { %>
-                    <option value="<%= store.id %>" <% if (store.id == product.store_id) { %> selected <%}%> ><%= store.name %></option>
-                <% }); %>
+                    <% store.forEach(store => { %>
+                        <option value="<%= store.id %>" <% if (store.id == product.store_id) { %> selected <%}%> ><%= store.name %></option>
+                    <% }); %>
 
                 </select>
 
