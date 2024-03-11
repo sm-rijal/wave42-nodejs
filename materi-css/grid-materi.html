@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Grid</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+    <style>
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left {
+            background-color: brown;
+
+        }
+        .left img {
+            width: 60px;
+        }
+        .right {
+            display: flex;
+            gap: 20px;
+
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 10px;
+
+        }
+        
+        .item1{
+            background-color: red;
+            grid-row: 1;
+            grid-column: 1 / span 2;
+        }
+        .item2{
+            background-color: yellow;
+            grid-column: 3;
+            grid-row: 1 / span 3;
+        }
+        .item3{
+            background-color: green;
+        }
+        .item4{
+            background-color: blue;
+        }
+        .item5{
+            background-color: orange;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container-header">
+        <div class="left">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3bX8iU-ahrLba6AJYjSyFwY61NLxklhNoFHFVLfaeQ&s" alt="">
+        </div>
+    
+        <div class="right">
+            <label for="">Pilih Bahasa</label>
+            <select name="" id="">
+                <option value="">Indo</option>
+                <option value="">Eng</option>
+            </select>
+            <button>Login</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="item1">1</div>
+        <div class="item2">2</div>
+        <div class="item3">3</div>
+        <div class="item4">4</div>
+        <div class="item5">5</div>
+
+    </div>
+
+
+
+    
+</body>
+</html>
