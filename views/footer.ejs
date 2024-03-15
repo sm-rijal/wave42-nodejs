@@ -1,3 +1,8 @@
-<footer>
-    <p>Copyright 2024</p>
+<footer style="position: fixed; bottom: 0; width: 100%;text-align: center;">
+    <p>Copyright <span id="year"></span></p>
 </footer>
+
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById('year').innerHTML = year
+</script>

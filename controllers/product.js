@@ -2,8 +2,10 @@ const { findAllProduct, createProduct, findByIdProduct, updateProduct } = requir
 
 const getProduct = async(req, res) => {
     try {
-        const products = await findAllProduct();
+        const limit = req.query.limit
+        const products = await findAllProduct(limit);
         res.render('products', {products})
+        // res.json(products)
 
     } catch (error) {
         console.log(error);
@@ -38,6 +40,7 @@ const postProduct = async (req, res) => {
         }
 
         await createProduct(newProduct);
+        req.flash('success','produk berhasil ditambahkan') // untuk kirim pesan aler ke halaman produk
 
         res.redirect('/products')
 
