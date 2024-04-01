@@ -3,7 +3,7 @@ const getHello = require("../controllers/hello");
 const { getStore } = require("../controllers/store");
 const { getProduct, postProduct, getByIdProduct, patchProduct } = require("../controllers/product");
 const formProduct = require("../controllers/form");
-const { findByIdProduct } = require("../models/productModel.");
+const { findByIdProduct, deleteProduct } = require("../models/productModel.");
 const { findAllStore } = require("../models/storeModel");
 const router = express.Router();
 
@@ -25,6 +25,12 @@ router.get('/edit-product/:id', async(req, res) => {
     const store = await findAllStore();
     res.render('edit-product', {product, store})
     
+});
+
+router.get('/delete-product/:id', async(req, res) => {
+    const ID = req.params.id
+    await deleteProduct(ID);
+    res.redirect('/products')
 })
 
 

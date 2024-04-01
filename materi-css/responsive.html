@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        * {
+            font-size: 24px;
+        }
+        body {
+            margin: 0;
+        }
+        header {
+            background-color: aquamarine;
+            font-size: 20px;
+            height: 8vh; /* 8% dari tinggi layar */
+            overflow-y: scroll;
+            font-size: 1rem;
+        }
+        
+        .container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+
+        .item {
+            /* width: 250px; */
+            background: red;
+            font-size: 2em;
+
+        }
+
+        img {
+            width: 50vw; /* 50% dari lebar layar*/
+        }
+
+
+        /* 600 kebawah */
+        @media only screen and (max-width: 600px) {
+            * {
+                font-size: 12px;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            header {
+                display: none;
+            }
+
+            .item {
+                padding: 20px;
+            }
+
+            img {
+                width: 100%;
+            }
+        }
+
+        /* 600 keatas */
+        @media only screen and (min-width: 600px) { 
+            .container {
+                color: #fff;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="">HOME</a>
+        <a href="">HOME</a>
+        <a href="">HOME</a>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+    </header>
+
+
+    <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/10/Avatar.jpg" alt="">
+
+    
+    <div class="container"> 
+        <div class="item">ITEM 1</div>
+        <div class="item">ITEM 2</div>
+        <div class="item">ITEM 3</div>
+        <div class="item">ITEM 4</div>
+        <div class="item">ITEM 5</div>
+    </div>
+
+</body>
+</html>
