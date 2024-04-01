@@ -4,8 +4,8 @@ const getProduct = async(req, res) => {
     try {
         const limit = req.query.limit
         const products = await findAllProduct(limit);
-        res.render('products', {products})
-        // res.json(products)
+        // res.render('products', {products})
+        res.json(products)
 
     } catch (error) {
         console.log(error);
@@ -36,13 +36,15 @@ const postProduct = async (req, res) => {
         const newProduct = {
             name,
             price: Number(price),
-            store_id: Number(store_id)
+            store_id: 2
         }
 
         await createProduct(newProduct);
-        req.flash('success','produk berhasil ditambahkan') // untuk kirim pesan aler ke halaman produk
-
-        res.redirect('/products')
+        // req.flash('success','produk berhasil ditambahkan') // untuk kirim pesan aler ke halaman produk
+        // res.redirect('/products')
+        res.status(201).json({
+            message: 'successs'
+        })
 
     } catch (error) {
      console.log(error);   

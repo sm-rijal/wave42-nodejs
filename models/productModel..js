@@ -22,7 +22,10 @@ const createProduct = (product) => {
 
 const updateProduct = (id, product) => {
     return knex('products').where('id', id).update(product)
-
 }
 
-module.exports = {findAllProduct, createProduct, findByIdProduct, updateProduct}
+const deleteProduct = (id) => {
+    return knex('products').where('id', id).del();
+}
+
+module.exports = {findAllProduct, createProduct, findByIdProduct, updateProduct, deleteProduct}
