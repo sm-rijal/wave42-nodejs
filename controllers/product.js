@@ -19,7 +19,8 @@ const getByIdProduct = async(req, res) => {
     try {
         const ID = req.params.id
         const detailProduct = await findByIdProduct(ID);
-        res.render('detail-product', {detailProduct})
+        // res.render('detail-product', {detailProduct})
+        res.json(detailProduct)
 
     } catch (error) {
         console.log(error);
@@ -65,7 +66,10 @@ const patchProduct = async (req, res) => {
 
         await updateProduct(ID, newProduct);
 
-        res.redirect('/products')
+        // res.redirect('/products')
+        res.json({
+            message: 'edit data berhasil'
+        })
 
     } catch (error) {
      console.log(error);   

@@ -13,7 +13,7 @@ router.get('/store', getStore);
 
 router.get('/products', getProduct);
 router.post('/add-product', postProduct);
-router.post('/edit-product/:id', patchProduct);
+router.patch('/edit-product/:id', patchProduct);
 router.get('/detail-product/:id', getByIdProduct);
 
 router.get('/form', formProduct);
@@ -27,10 +27,13 @@ router.get('/edit-product/:id', async(req, res) => {
     
 });
 
-router.get('/delete-product/:id', async(req, res) => {
+router.delete('/delete-product/:id', async(req, res) => {
     const ID = req.params.id
     await deleteProduct(ID);
-    res.redirect('/products')
+    // res.redirect('/products')
+    res.json({
+        message: 'delete data berhasil'
+    })
 })
 
 
