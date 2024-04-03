@@ -19,7 +19,8 @@ const getByIdProduct = async(req, res) => {
     try {
         const ID = req.params.id
         const detailProduct = await findByIdProduct(ID);
-        res.render('detail-product', {detailProduct})
+        // res.render('detail-product', {detailProduct})
+        res.json(detailProduct)
 
     } catch (error) {
         console.log(error);
@@ -36,7 +37,7 @@ const postProduct = async (req, res) => {
         const newProduct = {
             name,
             price: Number(price),
-            store_id: 2
+            store_id: Number(store_id)
         }
 
         await createProduct(newProduct);
@@ -65,7 +66,11 @@ const patchProduct = async (req, res) => {
 
         await updateProduct(ID, newProduct);
 
-        res.redirect('/products')
+        // res.redirect('/products')
+        res.json({
+            newProduct,
+            message: 'edit produk berhasil'
+        })
 
     } catch (error) {
      console.log(error);   
