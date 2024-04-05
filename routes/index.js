@@ -5,6 +5,7 @@ const { getProduct, postProduct, getByIdProduct, patchProduct } = require("../co
 const formProduct = require("../controllers/form");
 const { findByIdProduct, deleteProduct } = require("../models/productModel.");
 const { findAllStore } = require("../models/storeModel");
+const upload = require("../middlewares/fileUpload");
 const router = express.Router();
 
 
@@ -12,7 +13,7 @@ router.get('/', getHello);
 router.get('/store', getStore);
 
 router.get('/products', getProduct);
-router.post('/add-product', postProduct);
+router.post('/add-product', upload.single('image'), postProduct);
 router.patch('/edit-product/:id', patchProduct);
 router.get('/detail-product/:id', getByIdProduct);
 

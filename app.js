@@ -4,9 +4,11 @@ const app = express();
 const flash = require('express-flash')
 const session = require("express-session")
 const cors = require('cors')
+require('dotenv').config()
 
 app.set('view engine', 'ejs');
 app.use(express.static('public')) // untuk membaca file yang ada di folder public
+app.use('/uploads', express.static('uploads'))
 app.use(cors())
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
@@ -19,7 +21,7 @@ app.use(session({
 app.use(flash());
 
 app.use(router)
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 

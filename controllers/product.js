@@ -5,7 +5,10 @@ const getProduct = async(req, res) => {
         const limit = req.query.limit
         const products = await findAllProduct(limit);
         // res.render('products', {products})
-        res.json(products)
+        const dataProducts = products.map((item) => {
+            return {...item, image: process.env.PATH_FILE + item.image}
+        })
+        res.json(dataProducts)
 
     } catch (error) {
         console.log(error);
@@ -33,10 +36,13 @@ const getByIdProduct = async(req, res) => {
 const postProduct = async (req, res) => {
     try {
         // console.log(req.body);
+        console.log(req.file);
+
         const {name, price, store_id} = req.body
         const newProduct = {
             name,
             price: Number(price),
+            image: req.file.filename,
             store_id: Number(store_id)
         }
 

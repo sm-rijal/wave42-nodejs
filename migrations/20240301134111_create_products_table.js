@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table.increments('id').primary();
         table.string('name', 100).notNullable();
         table.integer('price').notNullable();
+        table.string('image', 250);
         table.integer('store_id').unsigned();
         table.foreign('store_id').references('store.id');
         table.timestamps(true, true); // -> akan mengenerate created_at sama updated_at
