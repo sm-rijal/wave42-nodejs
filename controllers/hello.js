@@ -1,6 +1,5 @@
 const getHello = (req, res) => {
-    // res.json('Hello')
-    res.render('index')
+    res.send('Hello World')
 }
 
 module.exports = getHello

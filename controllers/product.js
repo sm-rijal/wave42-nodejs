@@ -8,7 +8,7 @@ const getProduct = async(req, res) => {
         const dataProducts = products.map((item) => {
             return {...item, image: process.env.PATH_FILE + item.image, stock: 2}
         })
-        res.json(dataProducts)
+        res.status(200).json(dataProducts)
     } catch (error) {
         console.log(error);
         res.status(500).json({

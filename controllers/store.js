@@ -1,7 +1,7 @@
 const { findAllStore } = require("../models/storeModel")
 
 const getStore = async(req, res) => {
-    console.log('test');
+    // console.log('test');
     try {
         const store = await findAllStore();
         console.log(store);
