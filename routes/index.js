@@ -14,7 +14,7 @@ router.get('/store', getStore);
 
 router.get('/products', getProduct);
 router.post('/add-product', upload.single('image'), postProduct);
-router.patch('/edit-product/:id', patchProduct);
+router.patch('/edit-product/:id', upload.single('image'), patchProduct);
 router.get('/detail-product/:id', getByIdProduct);
 
 router.get('/form', formProduct);

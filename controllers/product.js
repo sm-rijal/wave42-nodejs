@@ -6,10 +6,9 @@ const getProduct = async(req, res) => {
         const products = await findAllProduct(limit);
         // res.render('products', {products})
         const dataProducts = products.map((item) => {
-            return {...item, image: process.env.PATH_FILE + item.image}
+            return {...item, image: process.env.PATH_FILE + item.image, stock: 2}
         })
         res.json(dataProducts)
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -21,8 +20,12 @@ const getProduct = async(req, res) => {
 const getByIdProduct = async(req, res) => {
     try {
         const ID = req.params.id
-        const detailProduct = await findByIdProduct(ID);
+        let detailProduct = await findByIdProduct(ID);
         // res.render('detail-product', {detailProduct})
+        detailProduct = {
+            ...detailProduct, image: process.env.PATH_FILE + detailProduct.image
+        }
+        
         res.json(detailProduct)
 
     } catch (error) {
@@ -36,7 +39,7 @@ const getByIdProduct = async(req, res) => {
 const postProduct = async (req, res) => {
     try {
         // console.log(req.body);
-        console.log(req.file);
+        // console.log(req.file);
 
         const {name, price, store_id} = req.body
         const newProduct = {
@@ -62,11 +65,13 @@ const postProduct = async (req, res) => {
 const patchProduct = async (req, res) => {
     try {
         // console.log(req.body);
+        console.log(req.file);
         const ID = req.params.id
         const {name, price, store_id} = req.body
         const newProduct = {
             name,
             price: Number(price),
+            image: req.file?.filename,
             store_id: Number(store_id)
         }
 
