@@ -5,7 +5,10 @@ const getStore = async(req, res) => {
     try {
         const store = await findAllStore();
         console.log(store);
-        res.json(store)
+        res.json({
+            message: 'ok',
+            data: store
+        })
         
     } catch (error) {
         console.log(error);
