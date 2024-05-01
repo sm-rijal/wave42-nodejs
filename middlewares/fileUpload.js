@@ -44,11 +44,11 @@ const fileUpload = (imageFile) => {
         return res.status(400).json(req.validationType)        
       }
 
-      if(!req.file && !err){
-        return res.status(400).json({
-          message: 'Image is required!'
-        })
-      }
+      // if(!req.file && !err){
+      //   return res.status(400).json({
+      //     message: 'Image is required!'
+      //   })
+      // }
 
       // kondisi untuk max size
       console.log(err);

@@ -4,7 +4,7 @@ const getStore = async(req, res) => {
     // console.log('test');
     try {
         const store = await findAllStore();
-        console.log(store);
+        // console.log(store);
         res.json({
             message: 'ok',
             data: store

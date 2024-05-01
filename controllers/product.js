@@ -1,3 +1,4 @@
+const {uploadFileCloudinary, deleteFileCloudinary} = require("../middlewares/cloudinary");
 const deleteFile = require("../middlewares/deleteFile");
 const { findAllProduct, createProduct, findByIdProduct, updateProduct, deleteProduct } = require("../models/productModel.");
 
@@ -45,18 +46,20 @@ const getByIdProduct = async(req, res) => {
 
 const postProduct = async (req, res) => {
     try {
-        // console.log(req.body);
-        // console.log(req.file);
 
         const {name, price, store_id} = req.body
+        const resultCloudinary = await uploadFileCloudinary(req.file.path)
+        // console.log(resultCloudinary);
+
         const newProduct = {
             name,
             price: Number(price),
-            image: req.file.filename,
+            // image: req.file.filename,
+            image: resultCloudinary,
             store_id: Number(store_id)
         }
 
-        await createProduct(newProduct);
+        await createProduct(newProduct);   
 
         // res.redirect('/products')
         res.status(201).json({
@@ -72,19 +75,26 @@ const postProduct = async (req, res) => {
 const patchProduct = async (req, res) => {
     try {
         // console.log(req.body);
-        console.log(req.file);
+        // console.log('test',req.file);
         const ID = req.params.id
         const product = await findByIdProduct(ID);
         const {name, price, store_id} = req.body
+
+        let resultCloudinary
+        if(req.file){
+            resultCloudinary = await uploadFileCloudinary(req.file.path)
+        }
+    
         const newProduct = {
             name,
             price: Number(price),
-            image: req.file?.filename,
+            image: req.file ? resultCloudinary : product.image,
             store_id: Number(store_id)
         }
 
         if(req.file){
-            deleteFile(product.image)
+            // deleteFile(product.image)
+            deleteFileCloudinary(product.image)
         }
 
         await updateProduct(ID, newProduct);
@@ -109,7 +119,8 @@ const removeProduct = async(req, res) => {
 
     if(product && product.image){
 
-        deleteFile(product.image)
+        // deleteFile(product.image) tidak dipake, karena menggunakan cloudinary
+        deleteFileCloudinary(product.image)
     }
     
     await deleteProduct(ID);
