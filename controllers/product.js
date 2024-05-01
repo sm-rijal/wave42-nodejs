@@ -57,7 +57,7 @@ const postProduct = async (req, res) => {
         }
 
         await createProduct(newProduct);
-        // req.flash('success','produk berhasil ditambahkan') // untuk kirim pesan aler ke halaman produk
+
         // res.redirect('/products')
         res.status(201).json({
             message: 'successs'

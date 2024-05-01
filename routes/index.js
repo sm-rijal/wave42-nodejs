@@ -13,8 +13,8 @@ router.get('/', getHello);
 router.get('/store', getStore);
 
 router.get('/products', getProduct);
-router.post('/add-product', upload.single('image'), postProduct);
-router.patch('/edit-product/:id', upload.single('image'), patchProduct);
+router.post('/add-product', upload('image'), postProduct);
+router.patch('/edit-product/:id', upload('image'), patchProduct);
 router.get('/detail-product/:id', getByIdProduct);
 
 router.get('/form', formProduct);
