@@ -1,5 +1,6 @@
 const {uploadFileCloudinary, deleteFileCloudinary} = require("../middlewares/cloudinary");
 const deleteFile = require("../middlewares/deleteFile");
+const uploadMinio = require("../middlewares/uploadMinio");
 const { findAllProduct, createProduct, findByIdProduct, updateProduct, deleteProduct } = require("../models/productModel.");
 
 const getProduct = async(req, res) => {
@@ -47,7 +48,14 @@ const getByIdProduct = async(req, res) => {
 const postProduct = async (req, res) => {
     try {
 
+
         const {name, price, store_id} = req.body
+
+        // upload to minio
+        // const resultMinio = await uploadMinio(req.file.originalname, req.file.path)
+        // console.log(resultMinio);
+
+        // upload to cloudinary
         const resultCloudinary = await uploadFileCloudinary(req.file.path)
         // console.log(resultCloudinary);
 
