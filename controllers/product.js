@@ -50,6 +50,7 @@ const postProduct = async (req, res) => {
 
 
         const {name, price, store_id} = req.body
+        // console.log(req.body);
 
         // upload to minio
         // const resultMinio = await uploadMinio(req.file.originalname, req.file.path)
