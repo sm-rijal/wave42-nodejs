@@ -51,11 +51,13 @@ const login = async(req, res) => {
     const accessToken = jwt.sign({
         id: user.id,
         email: user.email
-    }, secretKey, {expiresIn: '1m'})
+    }, secretKey, {expiresIn: '1h'})
 
     res.status(200).json({
-        name: user.name,
-        email: user.email,
+        user: {
+            name: user.name,
+            email: user.email,
+        },
         accessToken,
         message: 'success',
     })
@@ -63,9 +65,12 @@ const login = async(req, res) => {
 
 const whoami = (req, res) => {
 
-    const currentUser = req.user
+    const user = req.user // req.user ngambil data passport jwt findUser
     res.status(200).json({
-        data: currentUser,
+        user: {
+            name: user.name,
+            email: user.email
+        },
         message: 'success'
     })
 }
