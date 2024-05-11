@@ -2,7 +2,7 @@ const knexfile = require('../knexfile');
 const knex = require('knex')(knexfile.development);
 
 const registerUser = (user) => {
-    return knex('users').insert(user)
+    return knex('users').insert(user).returning('*')
 }
 
 

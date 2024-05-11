@@ -1,4 +1,4 @@
-const { findAllUser } = require("../models/userModel")
+const { findAllUser, findUser } = require("../models/userModel")
 
 const getUser = async(req, res) => {
 
@@ -15,5 +15,22 @@ const getUser = async(req, res) => {
     }
 
 }
+const getUserId = async(req, res) => {
 
-module.exports = {getUser}
+    try {
+
+        const user = req.user
+        const users = await findUser(user.id)
+        
+        res.status(200).json({
+            user: users,
+            message: 'success'
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+module.exports = {getUser, getUserId}

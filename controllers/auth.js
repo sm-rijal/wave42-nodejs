@@ -15,10 +15,15 @@ const register = async(req, res) => {
         password: encryptedPassword
     }
 
-    await registerUser(newUser)
+    const response = await registerUser(newUser)
+    // console.log(response);
 
     res.status(201).json({
-        data: newUser,
+        user: {
+            id: response[0].id,
+            name: response[0].name,
+            email: response[0].email
+        },
         message: 'success'
     })
 }
@@ -47,7 +52,7 @@ const login = async(req, res) => {
     }
 
     // create token
-    const secretKey = 'rahasia'
+    const secretKey = process.env.SECRET_KEY
     const accessToken = jwt.sign({
         id: user.id,
         email: user.email
@@ -67,10 +72,7 @@ const whoami = (req, res) => {
 
     const user = req.user // req.user ngambil data passport jwt findUser
     res.status(200).json({
-        user: {
-            name: user.name,
-            email: user.email
-        },
+        user: user,
         message: 'success'
     })
 }

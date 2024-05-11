@@ -3,9 +3,9 @@ const deleteFile = require('./deleteFile');
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-  cloud_name: 'dweahoclk',
-  api_key: '577355243647593',
-  api_secret: 'ETSwTf7eoVuRAk47Nr1s58W8cpY',
+  cloud_name: process.env.cloudinaryName,
+  api_key: process.env.cloudinaryKey,
+  api_secret: process.env.cloudinarySecret,
   secure: true,
 });
 
