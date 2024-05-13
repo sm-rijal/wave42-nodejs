@@ -1,5 +1,5 @@
 const knexfile = require('../knexfile');
-const knex = require('knex')(knexfile.development);
+const knex = require('knex')(knexfile.production);
 
 const registerUser = (user) => {
     return knex('users').insert(user).returning('*')

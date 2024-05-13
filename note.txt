@@ -1,0 +1,131 @@
+---- Deployment ---- 
+
+- login
+ username: ssh root@103.161.184.70
+ password: 
+- update
+ sudo apt update
+
+- instal node js
+apt install nodejs npm -y
+
+-install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+source ~/.bashrc
+nvm install 20.11.0
+nvm use 20.11.0
+
+- clone repo
+ git clone 
+ masuk ke foldernya
+ npm i
+
+- instal pm2 agar server jalan 24 jam
+ npm install pm2 -g
+- test cek pm2
+pm2 list
+- jalan perintah agar otomatis berjalan ketika server crash atau ke restart
+pm2 startup 
+- jalankan server
+pm2 start app.js --name api-main
+
+--- instal database ---
+sudo apt update
+sudo apt install postgresql
+sudo -u postgres psql
+ALTER USER postgres PASSWORD 'password_baru';
+CREATE DATABASE nama_database;
+\l -> list database
+\q -> exit database
+
+-- instal knex global --
+npm install knex -g
+-- migrate table
+knex migrate:latest --env production
+knex seed:run
+
+--- Instal Nginx ----
+-lanjut ke server
+sudo apt update
+sudo apt install nginx
+- Mulai Nginx:
+systemctl start nginx
+- Verifikasi Status Nginx (Opsional):
+systemctl status nginx
+- Tambahkan Nginx ke Startup (Opsional):
+ystemctl enable nginx
+
+cek ip address
+103.161.184.70
+jika welcome to nginx berarti berhasil
+
+
+---CLOUDFLARE---
+login
+add site - masukan domain
+copy name server ke domainesia
+klik lanjut terus di cloudflare
+untuk mengecek nameserver bisa di cek di whois
+
+jika sudah aktif klik Menu DNS, add record
+mauskan sub domain
+
+lanjut
+-- ssl/tls
+pilih menu origin server
+klik create sertificate
+klik create
+
+--- config nginx ---
+buat file nginx.conf di server
+dengan perintah berikut:
+vim /etc/nginx/conf.d/nginx.conf - untuk membuat file
+
+ --- config --
+server {
+    listen 80;
+    server_name api.samsul-rijal.my.id;
+    location / {
+        proxy_pass http://103.161.184.70:8000;
+    }
+
+}
+
+nginx -t
+nginx -s reload
+
+---- config https ---
+server {
+    listen 80;
+    server_name api.samsul-rijal.my.id;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    ssl        on;
+    ssl_certificate         /etc/ssl/certs/cert.pem;
+    ssl_certificate_key     /etc/ssl/private/cert.key;
+
+    server_name api.samsul-rijal.my.id;
+    location / {
+        proxy_pass http://103.161.184.70:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+mv /etc/nginx/sites-enabled/default default.bak - untuk rename default nginx
+
+-- masukan pem dan key dari cloudflare
+vim /etc/ssl/certs/cert.pem;
+vim  /etc/ssl/private/cert.key
+
+
+-- mengaktifkan Firewall --- 
+- ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+- ufw allow 22
