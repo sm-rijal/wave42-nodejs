@@ -33,5 +33,7 @@ jobs:
             cd ~/wave42-nodejs
             git pull origin master
             git status
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             npm install
             pm2 restart api-main
