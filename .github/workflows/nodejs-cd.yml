@@ -27,7 +27,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWROD }}
+          password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
             cd ~/wave42-nodejs
