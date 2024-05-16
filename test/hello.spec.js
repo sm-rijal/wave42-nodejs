@@ -24,7 +24,7 @@ describe('test fungsi get hello', () => {
 
         expect(res.status).toBeCalledWith(200)
         expect(res.json).toBeCalledWith({
-            message: "Hello"
+            message: "Hello Guys"
         })
     
     });
