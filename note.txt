@@ -53,7 +53,7 @@ systemctl start nginx
 - Verifikasi Status Nginx (Opsional):
 systemctl status nginx
 - Tambahkan Nginx ke Startup (Opsional):
-ystemctl enable nginx
+systemctl enable nginx
 
 cek ip address
 103.161.184.70
@@ -63,12 +63,15 @@ jika welcome to nginx berarti berhasil
 ---CLOUDFLARE---
 login
 add site - masukan domain
+klik continue sampai selesai
 copy name server ke domainesia
 klik lanjut terus di cloudflare
 untuk mengecek nameserver bisa di cek di whois
 
 jika sudah aktif klik Menu DNS, add record
 mauskan sub domain
+
+http://api-wav42.samsul-rijal.my.id/
 
 lanjut
 -- ssl/tls
@@ -84,21 +87,24 @@ vim /etc/nginx/conf.d/nginx.conf - untuk membuat file
  --- config --
 server {
     listen 80;
-    server_name api.samsul-rijal.my.id;
+    server_name api-wave42.samsul-rijal.my.id;
     location / {
         proxy_pass http://103.161.184.70:8000;
     }
 
 }
 
-nginx -t
-nginx -s reload
+nginx -t -> cek apakah ada error
+nginx -s reload -> refresh nginx
 
+---- untuk handle https, agar dibrowser ketika user isikan http dia akan langsung redirect ke https
 ---- config https ---
 server {
     listen 80;
-    server_name api.samsul-rijal.my.id;
-    return 301 https://$server_name$request_uri;
+    server_name api-wave42.samsul-rijal.my.id;
+    location / {
+        proxy_pass http://103.161.184.70:8000;
+    }
 }
 
 server {
@@ -107,7 +113,7 @@ server {
     ssl_certificate         /etc/ssl/certs/cert.pem;
     ssl_certificate_key     /etc/ssl/private/cert.key;
 
-    server_name api.samsul-rijal.my.id;
+    server_name api-wave42.samsul-rijal.my.id;
     location / {
         proxy_pass http://103.161.184.70:8000;
         proxy_set_header Host $host;
@@ -129,3 +135,9 @@ vim  /etc/ssl/private/cert.key
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 - ufw allow 22
+ufw allow 'Nginx Full'
+
+samsul-rijal.my.id -> frontend
+api-wave42.samsul-rijal.my.id -> backend
+
+http://103.161.184.70/

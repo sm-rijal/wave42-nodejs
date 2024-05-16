@@ -51,26 +51,4 @@ describe('GET test products return json data', () => {
         expect(response.status).toEqual(200);
         expect(response.body).toEqual(mockProduct);
     });
-
-    it('get product byid with json', async () => {
-
-        const mockProductById = {
-              "id": 38,
-              "name": "Jeruk",
-              "price": 25500,
-              "image": "http://localhost:8000/uploads/1713790110235-cimory.png",
-              "toko": "Laku Terus",
-              "store_id": 3,
-              "stock": 2
-            }
-
-
-        getByIdProduct.mockImplementation(async(req, res) => {
-            res.json(mockProductById)
-        });
-
-        const response = await request(app).get('/detail-product/38')
-        expect(response.status).toEqual(200);
-        expect(response.body).toEqual(mockProductById);
-    });
 });

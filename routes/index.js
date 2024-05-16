@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/', getHello);
 router.get('/store', getStore);
 
-router.get('/products', restrict, getProduct);
+router.get('/products',getProduct);
 router.post('/products', restrict, upload('image'), postProduct);
 router.patch('/products/:id', restrict, upload('image'), patchProduct);
 router.get('/products/:id', getByIdProduct);
