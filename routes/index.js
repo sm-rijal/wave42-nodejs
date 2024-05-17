@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/', getHello);
 router.get('/store', getStore);
 
-router.get('/products',getProduct);
+router.get('/products',restrict, getProduct);
 router.post('/products', restrict, upload('image'), postProduct);
 router.patch('/products/:id', restrict, upload('image'), patchProduct);
 router.get('/products/:id', getByIdProduct);
@@ -50,7 +50,7 @@ router.get('/auth/google/callback',  (req, res, next) => {
         }
 
         const token = userToken.accessToken
-        return res.redirect(`http://localhost:3000/auth-success?token=${token}`)
+        return res.redirect(`https://www.samsul-rijal.my.id/auth-success?token=${token}`)
 
     },)(req, res, next)
 })
