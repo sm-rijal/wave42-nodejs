@@ -125,7 +125,7 @@ server {
 
 mv /etc/nginx/sites-enabled/default default.bak - untuk rename default nginx
 
--- masukan pem dan key dari cloudflare
+----- masukan pem dan key dari cloudflare
 vim /etc/ssl/certs/cert.pem;
 vim  /etc/ssl/private/cert.key
 
@@ -142,6 +142,19 @@ api-wave42.samsul-rijal.my.id -> backend
 
 http://103.161.184.70/
 
+
+----------------- Generate SSL via certbot -------------------------
+masuk ke https://certbot.eff.org/
+pada "My HTTP website is running" pilih web server nginx dan os ubuntu
+jalankan perintah
+- apt install snapd
+- sudo apt-get remove certbot
+- rm /usr/bin/certbot
+- snap install --classic certbot
+- ln -s /snap/bin/certbot /usr/bin/certbot
+- certbot --nginx
+- certbot certonly --nginx
+- certbot renew --dry-run
 
 
 --------------------------------------------------------------
